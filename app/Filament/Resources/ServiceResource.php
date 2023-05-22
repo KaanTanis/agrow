@@ -23,6 +23,8 @@ class ServiceResource extends Resource
 
     protected static ?string $slug = 'service';
 
+    protected static bool $shouldRegisterNavigation = false;
+
     public static function getLabel(): ?string
     {
         return __('Servis');

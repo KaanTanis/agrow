@@ -75,14 +75,6 @@ class SettingResource extends Resource
             Forms\Components\TextInput::make('fields.address')
                 ->label(__('Adres')),
 
-            LeafletInput::make('fields.location')
-                ->label(__('Konum'))
-                ->setMapHeight(300)
-                ->setZoomControl(true)
-                ->setScrollWheelZoom(true)
-                ->setZoomLevel(16)
-                ->required(),
-
             Forms\Components\Repeater::make('fields.socials')
                 ->collapsible()
                 ->collapsed()
@@ -104,6 +96,7 @@ class SettingResource extends Resource
                         ->label(__('URL')),
 
                     IconPicker::make('icon')
+                        ->sets(['bootstrap-icons'])
                         ->label(__('İkon')),
                 ]),
 
@@ -128,27 +121,23 @@ class SettingResource extends Resource
                 ->schema([
                     Forms\Components\Section::make(__('Logo & Favicon'))
                         ->schema([
-                            Cropper::make('fields.logo')
-                                ->rotationalStep(5)
+                            Forms\Components\FileUpload::make('fields.logo')
                                 ->label(__('Logo')),
 
-                            Cropper::make('fields.light_logo')
-                                ->rotationalStep(5)
+                            Forms\Components\FileUpload::make('fields.light_logo')
                                 ->label(__('Light Logo')),
 
-                            Cropper::make('fields.favicon')
-                                ->rotationalStep(5)
-                                ->imageCropAspectRatio('1:1')
+                            Forms\Components\FileUpload::make('fields.favicon')
                                 ->label(__('Favicon')),
                         ]),
 
-                    Forms\Components\Section::make(__('Varsayılan Banner'))
-                        ->schema([
-                            Cropper::make('fields.default_banner')
-                                ->imageCropAspectRatio('19:5')
-                                ->helperText(__('Varsayılan banner seçildiği zaman, eğer içerikten banner silinirse, bu banner gösterilecektir.'))
-                                ->label(''),
-                        ])
+//                    Forms\Components\Section::make(__('Varsayılan Banner'))
+//                        ->schema([
+//                            Cropper::make('fields.default_banner')
+//                                ->imageCropAspectRatio('19:5')
+//                                ->helperText(__('Varsayılan banner seçildiği zaman, eğer içerikten banner silinirse, bu banner gösterilecektir.'))
+//                                ->label(''),
+//                        ])
                 ])
                     ->inlineLabel(false)
                     ->columnSpan(1),

@@ -12,6 +12,8 @@ use Illuminate\Support\Facades\Route;
 |--------------------------------------------------------------------------
 */
 
+Route::get('/', [PageController::class, 'home'])->name('home');
+
 
 Route::get('s/{id}/{type?}/{slug?}', [PageController::class, 'page'])->name('page');
 

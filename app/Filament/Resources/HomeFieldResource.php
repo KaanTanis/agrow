@@ -52,8 +52,8 @@ class HomeFieldResource extends Resource
                             ->label(__('Hakkımızda Başlık'))
                             ->required(fn() => $lang == 'tr'),
 
-                        Forms\Components\TextInput::make('fields.about_big_title.' . $lang)
-                            ->label(__('Hakkımızda Büyük Başlık')),
+//                        Forms\Components\TextInput::make('fields.about_big_title.' . $lang)
+//                            ->label(__('Hakkımızda Büyük Başlık')),
 
                         Forms\Components\RichEditor::make('fields.about_content.' . $lang)
                             ->label(__('Hakkımızda İçerik')),
@@ -82,12 +82,14 @@ class HomeFieldResource extends Resource
         }
 
         $untranslatableFieldsMiddle = [
+            Forms\Components\TextInput::make('fields.wmiddle_url')
+                ->label(__('Url')),
             Cropper::make('fields.middle_bg_1')
                 ->modalSize('xl')
                 ->label(__('Görsel')),
-            Cropper::make('fields.middle_bg_2')
-                ->modalSize('xl')
-                ->label(__('Görsel')),
+//            Cropper::make('fields.middle_bg_2')
+//                ->modalSize('xl')
+//                ->label(__('Görsel')),
         ];
 
         $untranslatableFields = [
@@ -95,8 +97,6 @@ class HomeFieldResource extends Resource
                 ->imageCropAspectRatio('9:14')
                 ->modalSize('xl')
                 ->label(__('Ana Sayfa Hakkımızda Görseli')),
-
-            IconPicker::make('test')
         ];
 
         $allFields = [
@@ -108,8 +108,8 @@ class HomeFieldResource extends Resource
                 ->schema([
                     Forms\Components\Tabs::make('locale')
                         ->schema($translatableFields),
-                    Forms\Components\Section::make(__('Çevirilemeyen Alanlar'))
-                        ->schema($untranslatableFields),
+//                    Forms\Components\Section::make(__('Çevirilemeyen Alanlar'))
+//                        ->schema($untranslatableFields),
                 ])->collapsible(),
 
             Forms\Components\Section::make(__('Orta Tanıtım Alanı'))
@@ -118,15 +118,15 @@ class HomeFieldResource extends Resource
                         ->schema($translatableFieldsMiddle),
                     Forms\Components\Section::make(__('Çevirilemeyen Alanlar'))
                         ->schema($untranslatableFieldsMiddle),
-                ])->collapsible()->collapsed(),
+                ])->collapsible(),
 
-            Forms\Components\Section::make(__('Partnerlerimiz'))
-                ->schema([
-                    Forms\Components\FileUpload::make('fields.partners')
-                        ->label(__('Partnerler'))
-                        ->enableReordering()
-                        ->multiple()
-                ])->collapsed()->collapsible()
+//            Forms\Components\Section::make(__('Partnerlerimiz'))
+//                ->schema([
+//                    Forms\Components\FileUpload::make('fields.partners')
+//                        ->label(__('Partnerler'))
+//                        ->enableReordering()
+//                        ->multiple()
+//                ])->collapsed()->collapsible()
         ];
 
         /////////////////////////////

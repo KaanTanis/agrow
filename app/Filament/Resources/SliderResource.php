@@ -66,16 +66,18 @@ class SliderResource extends Resource
             Forms\Components\TextInput::make('fields.button_link')
                 ->label(__('Buton Link')),
 
-            Cropper::make('fields.image')
-                ->enableImageRotation()
-                ->rotationalStep(5)
-                ->enableImageFlipping()
-                ->enabledAspectRatios([
-                    '16:9'
-                ])
+            Forms\Components\FileUpload::make('fields.image')
+                ->image()
+                ->imageResizeMode('cover')
                 ->imageCropAspectRatio('16:9')
-                ->modalSize('xl')
+                ->imageResizeTargetWidth('1920')
+                ->imageResizeTargetHeight('1080')
                 ->label(__('Görsel')),
+
+//            Cropper::make('fields.image')
+//                ->imageCropAspectRatio('16:9')
+//                ->enableOpen()
+//                ->label(__('Görsel')),
         ];
 
         $allFields = [

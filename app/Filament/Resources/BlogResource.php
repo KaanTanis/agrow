@@ -24,6 +24,8 @@ class BlogResource extends Resource
 
     protected static ?string $navigationIcon = 'heroicon-o-pencil';
 
+    protected static bool $shouldRegisterNavigation = false;
+
     public function modelType(): string
     {
         return 'blog';

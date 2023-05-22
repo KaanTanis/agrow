@@ -60,5 +60,7 @@
     "Sayfalar": "Pages",
     "Servisler": "Services",
     "Üst Servis": "Parent Service",
-    "Bu relation sonradan değiştirilemez. Otomatik childları getirir.": "This relation cannot be changed later. Automatically brings childs."
+    "Bu relation sonradan değiştirilemez. Otomatik childları getirir.": "This relation cannot be changed later. Automatically brings childs.",
+
+    "Ana Sayfa": "Home Page"
 }

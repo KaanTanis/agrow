@@ -20,6 +20,8 @@ class MenuBuilder extends BasePage
 {
     protected static ?string $navigationIcon = 'heroicon-o-view-list';
 
+    protected static bool $shouldRegisterNavigation = false;
+
     public static function getMaxDepth(): int
     {
         return 2;

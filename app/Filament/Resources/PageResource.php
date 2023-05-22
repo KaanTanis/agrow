@@ -22,6 +22,8 @@ class PageResource extends Resource
 {
     protected static ?string $model = Post::class;
 
+    protected static bool $shouldRegisterNavigation = false;
+
     public function modelType(): string
     {
         return 'page';
