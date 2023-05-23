@@ -2,11 +2,11 @@
 
 namespace App\Filament\Resources;
 
-use App\Filament\Resources\ProductResource\Pages;
-use App\Filament\Resources\ProductResource\RelationManagers;
+use App\Filament\Resources\SpecialProductResource\Pages;
+use App\Filament\Resources\SpecialProductResource\RelationManagers;
 use App\Helpers\Helper;
 use App\Models\Post;
-use App\Models\Product;
+use App\Models\SpecialProduct;
 use Filament\Forms;
 use Filament\Resources\Form;
 use Filament\Resources\Resource;
@@ -14,23 +14,23 @@ use Filament\Resources\Table;
 use Filament\Tables;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
+use Illuminate\Support\HtmlString;
 use Illuminate\Support\Str;
-use Nuhel\FilamentCropper\Components\Cropper;
 
-class ProductResource extends Resource
+class SpecialProductResource extends Resource
 {
     protected static ?string $model = Post::class;
 
-    protected static ?string $slug = 'product';
+    protected static ?string $slug = 'special-product';
 
     public static function getLabel(): ?string
     {
-        return __('Ürün');
+        return __('Özel Ürün');
     }
 
     public static function getPluralLabel(): ?string
     {
-        return __('Ürünler');
+        return __('Özel Ürünler');
     }
 
     protected static ?string $navigationIcon = 'heroicon-o-collection';
@@ -64,14 +64,28 @@ class ProductResource extends Resource
                 ->label(__('Fiyat'))
                 ->numeric(),
 
+            Forms\Components\TextInput::make('fields.stock')
+                ->label(__('Stok'))
+                ->numeric(),
+
             Forms\Components\FileUpload::make('fields.cover')
                 ->label(__('Kapak Resmi'))
         ];
 
         $allFields = [
             // define type
-            Forms\Components\Hidden::make('type')->default('product'),
+            Forms\Components\Hidden::make('type')->default('special_product'),
 
+            Forms\Components\Section::make(__('Müşteriye Verilecek Link'))
+                ->schema([
+                    Forms\Components\Placeholder::make('link')
+                        ->label('')
+                        ->content(function ($record) {
+                            if ($record) {
+                                return new HtmlString('<a href="' . route('product', $record->id) . '" target="_blank">' . route('product', $record->id) . '</a>');
+                            }
+                        }),
+                ]),
             // define tab and section
             Forms\Components\Tabs::make('locale')
                 ->schema($translatableFields),
@@ -122,9 +136,9 @@ class ProductResource extends Resource
     public static function getPages(): array
     {
         return [
-            'index' => Pages\ListProducts::route('/'),
-            'create' => Pages\CreateProduct::route('/create'),
-            'edit' => Pages\EditProduct::route('/{record}/edit'),
+            'index' => Pages\ListSpecialProducts::route('/'),
+            'create' => Pages\CreateSpecialProduct::route('/create'),
+            'edit' => Pages\EditSpecialProduct::route('/{record}/edit'),
         ];
     }
 }

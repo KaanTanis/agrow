@@ -50,7 +50,27 @@ class PageController extends Controller
     {
         $sliders = Post::query()->where('type', 'slider')->get();
         $nutrients = Post::query()->where('type', 'nutrient')->get();
+        $product = Post::query()->where('type', 'product')->first();
 
-        return \view('home', compact('sliders', 'nutrients'));
+        return \view('home', compact('sliders', 'nutrients', 'product'));
+    }
+
+    public function product($id, $slug = null)
+    {
+        $product = Post::query()
+            ->where(function ($query) {
+                $query->where('type', 'product');
+                $query->orWhere('type', 'special_product');
+            })
+            ->where('id', $id)->first();
+
+        if ($slug == null) {
+            return redirect()->route('product', [
+                'id' => $id,
+                'slug' => Str::slug($product->_get('title')),
+            ])->setStatusCode(301);
+        }
+
+        return \view('product', compact('product'));
     }
 }

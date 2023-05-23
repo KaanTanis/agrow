@@ -471,7 +471,7 @@
         </script>
 
         <!-- start section -->
-        <section class="section">
+        <section class="section" id="about">
             <div class="container">
                 <div class="section-heading section-heading--center" data-aos="fade">
                     <h2 class="__title">
@@ -560,7 +560,7 @@
         <!-- end section -->
 
         <!-- start section -->
-        <section class="section section--no-pt section--no-pb section--gutter">
+        <section class="section section--no-pt section--no-pb section--gutter" id="science">
             <div class="container-fluid px-md-0">
                 <!-- start product preview -->
                 <div class="product-preview product-preview--style-1">
@@ -625,40 +625,49 @@
         <!-- end section -->
 
         <!-- start section -->
-        <section class="section section--no-pt section--no-pb section--gutter mt-12">
+        <section class="section section--no-pt section--no-pb section--gutter mt-12" id="product">
             <!-- start banner simple -->
+            <style>
+                .simple-banner--style-1 {
+                    background: url("{{ Storage::url($product->_get('cover')) }}") no-repeat top right !important;
+                }
+            </style>
             <div class="simple-banner simple-banner--style-1" data-aos="fade" data-aos-offset="50">
 
-                <div class="__label d-none d-md-block">
-                    <div class="d-table m-auto h-100">
-                        <div class="d-table-cell align-middle">
-                            <span class="num-1">1</span>
-                        </div>
+{{--                <div class="__label d-none d-md-block">--}}
+{{--                    <div class="d-table m-auto h-100">--}}
+{{--                        <div class="d-table-cell align-middle">--}}
+{{--                            <span class="num-1">1</span>--}}
+{{--                        </div>--}}
 
-                        <div class="d-table-cell align-middle">
-                            <span class="num-2">50$</span>
-                            <span>Kg</span>
-                        </div>
-                    </div>
-                </div>
+{{--                        <div class="d-table-cell align-middle">--}}
+{{--                            <span class="num-2">{{ $product->_get('price') }}₺</span>--}}
+{{--                        </div>--}}
+{{--                    </div>--}}
+{{--                </div>--}}
 
                 <div class="container">
                     <div class="row">
                         <div class="col-12">
                             <div class="__inner">
-                                <img class="img-fluid  lazy" src="img/blank.gif" data-src="img/site_logo.png" alt="demo" />
+                                <img class="img-fluid lazy mt-3" width="80" src="img/blank.gif" data-src="{{ Storage::url($settings->_get('logo')) }}" alt="demo" />
 
                                 <div class="row">
                                     <div class="col-12 col-lg-7 col-xl-5">
                                         <div class="banner__text" data-aos="fade-left" data-delay="500">
-                                            <h2 class="__title h1"><b style="display: block; color: #c6c820;">Fresh Apples</b> <span>in Our Store</span></h2>
+                                            <h2 class="__title h1">
+                                                <b style="display: block; color: #c6c820;">
+                                                    {{ substr($product->_get('title'), 0, strpos($product->_get('title'), ' '))}}
+                                                </b>
+                                                <span>{{ substr(strstr($product->_get('title')," "), 1) }}</span>
+                                            </h2>
 
                                             <p>
-                                                The generated Lorem Ipsum is therefore always free from repetition injected humour, or non-characteristic words etc.
+                                                {{ $product->_get('description') }}
                                             </p>
 
                                             <p>
-                                                <a class="custom-btn custom-btn--medium custom-btn--style-1" href="#">Buy</a>
+                                                <a class="custom-btn custom-btn--medium custom-btn--style-1" href="{{ route('product', $product->id) }}">{{ __('Detaylar') }}</a>
                                             </p>
                                         </div>
                                     </div>
@@ -673,7 +682,7 @@
         <!-- end section -->
 
         <!-- start section -->
-        <section class="section section--dark-bg">
+        <section class="section section--dark-bg" id="contact">
             <div class="container">
                 <div class="section-heading section-heading--center section-heading--white" data-aos="fade">
                     <h2 class="__title">{!! __('İletişime <span>Geç</span>')  !!} </h2>

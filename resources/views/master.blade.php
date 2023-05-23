@@ -1,3 +1,6 @@
+<!DOCTYPE html>
+
+<html class="" lang="{{ app()->getLocale() }}">
 <!-- Where Imagination Meets Innovation - VOGO -->
 @vite('resources/css/app.css')
 
@@ -8,8 +11,6 @@
 </script>
 
 <!-- Head -->
-<!DOCTYPE html>
-<html class="" lang="{{ app()->getLocale() }}">
 <head>
     <title>{{ $settings->_get('title') }}</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -30,6 +31,11 @@
     <link rel="apple-touch-icon" sizes="72x72" href="{{ Storage::url($settings->_get('favicon')) }}">
     <link rel="apple-touch-icon" sizes="114x114" href="{{ Storage::url($settings->_get('favicon')) }}">
 
+    <style>
+        html {
+            scroll-behavior: smooth;
+        }
+    </style>
     <!-- Critical styles
     ================================================== -->
     <link rel="stylesheet" href="/css/critical.min.css" type="text/css">
@@ -62,17 +68,23 @@
     <script type="text/javascript" src="/js/device.min.js"></script>
 </head>
 
+<style>
+    .top-bar--style-1 {
+        background-color: #24292c;
+    }
+</style>
+
 <body>
 <div id="app">
     <!-- start header -->
-    <header id="top-bar" class="top-bar top-bar--style-2">
+    <header id="top-bar" class="top-bar {{ request()->routeIs('home') ? 'top-bar--style-2  ' : 'top-bar--style-1' }}">
         <div class="top-bar__bg" style="background-color: #24292c;background-image: url(img/top_bar_bg-1.jpg);background-repeat: no-repeat;background-position: left bottom;"></div>
 
         <div class="container-fluid">
             <div class="row align-items-center justify-content-between no-gutters">
 
                 <a class="top-bar__logo site-logo" href="i/">
-                    <img class="img-fluid" style="padding: 15px 0; max-height: 120px !important;" src="{{ Storage::url($settings->_get('logo')) }}" alt="demo" />
+                    <img class="img-fluid" style="padding: 15px 0; max-height: 80px !important;" src="{{ Storage::url($settings->_get('logo')) }}" alt="demo" />
                 </a>
 
                 <a id="top-bar__navigation-toggler" class="top-bar__navigation-toggler top-bar__navigation-toggler--light" href="javascript:void(0);"><span></span></a>
@@ -92,19 +104,23 @@
                         <nav id="top-bar__navigation" class="top-bar__navigation navigation" role="navigation">
                             <ul>
                                 <li class="active">
-                                    <a href="javascript:void(0);">{{ __('Ana Sayfa') }}</a>
+                                    <a href="/">{{ __('Ana Sayfa') }}</a>
                                 </li>
 
                                 <li>
-                                    <a href="/">{{ __('Hakkımızda') }}</a>
+                                    <a href="/#about">{{ __('Hakkımızda') }}</a>
                                 </li>
 
                                 <li class="">
-                                    <a href="javascript:void(0);">{{ __('Bilim') }}</a>
+                                    <a href="/#science">{{ __('Bilim') }}</a>
                                 </li>
 
                                 <li class="">
-                                    <a href="javascript:void(0);">{{ __('İletişim') }}</a>
+                                    <a href="/#product">{{ __('Ürün') }}</a>
+                                </li>
+
+                                <li class="">
+                                    <a href="/#contact">{{ __('İletişim') }}</a>
                                 </li>
 
                                 <li class="has-submenu">
@@ -129,7 +145,7 @@
 @yield('content')
 
     <!-- start footer -->
-    <footer id="footer" class="footer--style-1">
+    <footer id="footer" class="footer--style-4">
         <div class="container">
             <div class="row">
                 <div class="col-12 col-sm-auto mt-4">
@@ -147,7 +163,7 @@
                     <div class="row align-items-md-center no-gutters">
                         <div class="col-12 col-md mr-5">
                             <div class="footer__item">
-                                <p>
+                                <p style="color: #adadb0">
                                     {{ $settings->_get('footer_text') }}
                                 </p>
                             </div>
